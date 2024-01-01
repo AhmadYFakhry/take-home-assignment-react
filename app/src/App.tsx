@@ -1,30 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
+import LoginPage from './pages/login'
+import ProductsPage from './pages/products'
+import HomePage from './pages/home'
+import { useContext } from 'react'
+import { AuthContext } from './context/auth'
 function App() {
-    const [count, setCount] = useState(0)
+    const auth = useContext(AuthContext)
+    const router = createBrowserRouter([
+        {
+            id: 'root',
+            path: '/',
+            children: [
+                {
+                    index: true,
+                    Component: HomePage,
+                },
+                {
+                    path: 'login',
+                    loader: loginLoader,
+                    Component: LoginPage,
+                },
+                {
+                    path: 'products',
+                    loader: protectedLoader,
+                    Component: ProductsPage,
+                },
+            ],
+        },
+    ])
+
+    async function loginLoader() {
+        // If user is authenticated, redirect to products
+        if (auth.accessToken && auth.refreshToken) {
+            return redirect('/products')
+        }
+        return null
+    }
+
+    async function protectedLoader() {
+        // If user is not authenticated, redirect to login
+        if (!auth.accessToken && !auth.refreshToken) {
+            return redirect('/login')
+        }
+        return null
+    }
 
     return (
-        <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-        </>
+        <div className="w-full flex justify-center p-5 m-auto max-w-screen-md">
+            <RouterProvider router={router} />
+        </div>
     )
 }
 
