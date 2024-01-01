@@ -12,19 +12,17 @@ function JudoTypography(props: Props) {
 
     switch (variant) {
         case 'title':
-            return (
-                <h1 className={classNames('text-3xl leading-10 font-semibold text-gray-900', className)}>{children}</h1>
-            )
+            return <h1 className={classNames('text-3xl leading-10 font-semibold text-black', className)}>{children}</h1>
         case 'subtitle':
-            return <h2 className={classNames('text-2xl font-bold text-gray-900', className)}>{children}</h2>
+            return <h2 className={classNames('text-2xl font-bold text-black', className)}>{children}</h2>
         case 'text':
-            return <p className={classNames('text-sm text-gray-900', className)}>{children}</p>
+            return <p className={classNames('text-sm text-black', className)}>{children}</p>
         case 'decoration':
             return (
                 <p className={classNames('text-sm text-gray-400 leading-6 tracking-normal', className)}>{children}</p>
             )
         default:
-            return <p className={classNames('text-sm text-gray-900', className)}>{children}</p>
+            return <p className={classNames('text-sm text-black', className)}>{children}</p>
     }
 }
 
