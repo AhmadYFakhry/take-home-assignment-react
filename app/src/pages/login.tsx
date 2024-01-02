@@ -30,7 +30,7 @@ function LoginPage() {
                     Sign In
                 </JudoTypography>
 
-                <div className="flex flex-col justify-start w-full gap-y-4 mb-6">
+                <div className="flex flex-col justify-start w-full gap-y-6 mb-6">
                     <JudoTextInput onChange={updateEmail} placholder={'andrea@judo.app'} label="Email" />
                     <JudoTextInput onChange={updatePassword} label="Password" type="password" />
                 </div>
@@ -42,7 +42,7 @@ function LoginPage() {
                 {error && <p className="mt-8 text-sm text-red-400">{error.message}</p>}
 
                 {/* Left href since we don't actually have a page */}
-                <JudoLink className="mt-8 font-bold" url="#">
+                <JudoLink className="mt-8 font-bold text-center" url="#">
                     Forgot Password?
                 </JudoLink>
             </JudoCard>

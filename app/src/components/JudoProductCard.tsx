@@ -25,7 +25,7 @@ function JudoProductCard(props: Props) {
                 </div>
             </div>
             <div className="shrink-0 flex flex-col items-end">
-                <JudoTypography>{product.currency}</JudoTypography>
+                <JudoTypography className="font-bold">{product.currency}</JudoTypography>
                 <JudoTypography>{product.price}</JudoTypography>
             </div>
         </li>
